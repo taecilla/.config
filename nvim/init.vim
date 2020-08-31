@@ -138,6 +138,15 @@ set shiftwidth=0
 
 " }}}
 
+" Providers {{{
+
+let g:loaded_node_provider=0
+let g:loaded_python_provider=0
+let g:loaded_python3_provider=0
+let g:loaded_ruby_provider=0
+
+" }}}
+
 " Search and replace {{{
 
 nnoremap n nzz
@@ -389,59 +398,11 @@ set nowrap
 
 " Packages
 
-let g:loaded_node_provider=0
-let g:loaded_python_provider=0
-let g:loaded_python3_provider=0
-let g:loaded_ruby_provider=0
-
-let g:auto_plugins=[
-	\ {'url': 'https://github.com/tssm/neovim-automaton'},
-	\ {'url': 'git@github.com:tssm/vim-capital-h'},
-	\ {'url': 'https://github.com/norcalli/nvim-colorizer.lua'},
-	\ {'url': 'https://github.com/tpope/vim-commentary'},
-	\ {'url': 'https://github.com/lifecrisis/vim-difforig'},
-	\ {'url': 'https://github.com/cohama/lexima.vim'},
-	\ {'url': 'https://github.com/zandrmartin/lexima-template-rules'},
-	\ {'url': 'https://github.com/AndrewRadev/linediff.vim'},
-	\ {'url': 'https://github.com/samoshkin/vim-mergetool'},
-	\ {'url': 'https://github.com/gpanders/vim-oldfiles'},
-	\ {'url': 'https://github.com/tpope/vim-repeat'},
-	\ {'url': 'https://github.com/tpope/vim-sleuth'},
-	\ {'url': 'https://github.com/tpope/vim-surround'},
-	\ {'url': 'git@github.com:tssm/tectonic.vim'},
-	\ {'url': 'https://github.com/bronson/vim-trailing-whitespace'},
-	\ ]
-
 " Color schemes {{{
 
-let g:auto_plugins+=[{'url': 'https://github.com/ayu-theme/ayu-vim', 'opt': v:true}]
 let g:ayucolor="mirage"
 
-let g:auto_plugins+=[
-	\ {'url': 'https://github.com/thenewvu/vim-colors-blueprint', 'opt': v:true},
-	\ {'url': 'git@github.com:tssm/c64-vim-color-scheme', 'opt': v:true},
-	\ {'url': 'https://github.com/challenger-deep-theme/vim.git', 'opt': v:true},
-	\ {'url': 'https://github.com/Jimeno0/vim-chito', 'opt': v:true},
-	\ {'url': 'https://github.com/wadackel/vim-dogrun', 'opt': v:true},
-	\ {'url': 'git@github.com:tssm/fairyfloss.vim', 'opt': v:true},
-	\ {'url': 'https://github.com/whatyouhide/vim-gotham', 'opt': v:true},
-	\ {'url': 'https://github.com/charlespeters/ganymede.vim', 'opt': v:true},
-	\ ]
 let g:ganymede_solid_background=1
-
-let g:auto_plugins+=[
-	\ {'url': 'https://github.com/morhetz/gruvbox', 'opt': v:true},
-	\ {'url': 'https://github.com/kaicataldo/material.vim', 'opt': v:true},
-	\ {'url': 'https://github.com/icymind/NeoSolarized', 'opt': v:true},
-	\ {'url': 'https://github.com/haishanh/night-owl.vim', 'opt': v:true},
-	\ {'url': 'https://github.com/arcticicestudio/nord-vim', 'opt': v:true},
-	\ {'url': 'https://github.com/trevordmiller/nova-vim', 'opt': v:true},
-	\ {'url': 'https://github.com/mhartington/oceanic-next', 'opt': v:true},
-	\ {'url': 'https://github.com/sts10/vim-pink-moon', 'opt': v:true},
-	\ {'url': 'https://github.com/connorholyday/vim-snazzy', 'opt': v:true},
-	\ {'url': 'https://github.com/nightsense/snow', 'opt': v:true},
-	\ {'url': 'https://github.com/nightsense/strawberry', 'opt': v:true},
-	\ ]
 
 " }}}
 
@@ -449,8 +410,6 @@ let g:auto_plugins+=[
 
 let g:loaded_netrw = 1
 let g:loaded_netrwPlugin = 1
-
-let g:auto_plugins+=[{'url': 'https://github.com/justinmk/vim-dirvish'}]
 
 augroup DirvishSetUp
 	autocmd!
@@ -466,19 +425,12 @@ command! -nargs=1 -complete=dir -bang E %bdelete<bang> | cd <args> | Dirvish
 
 " Editorconfig {{{
 
-let g:auto_plugins+=[{'url': 'https://github.com/editorconfig/editorconfig-vim'}]
-
 let g:EditorConfig_max_line_indicator="none"
 " Lengthmatters takes care of this
 
 " }}}
 
 " FZF {{{
-
-let g:auto_plugins+=[
-	\ {'url': 'https://github.com/junegunn/fzf'},
-	\ {'url': 'https://github.com/junegunn/fzf.vim'},
-	\ ]
 
 let $FZF_DEFAULT_OPTS='--ansi --info inline --layout reverse --preview-window noborder'
 
@@ -505,10 +457,8 @@ nnoremap <silent> <leader>g :call RipgrepFzf()<cr>
 
 nnoremap <silent> <leader>h :History<cr>
 
-let g:auto_plugins+=[{'url': 'https://github.com/fszymanski/fzf-quickfix'}]
 nnoremap <silent> <leader>q :Quickfix<cr>
 
-let g:auto_plugins+=[{'url': 'https://github.com/dominickng/fzf-session.vim'}]
 let g:fzf_session_path=stdpath('data') . '/session'
 nnoremap <silent> <leader>s :Sessions<cr>
 
@@ -516,19 +466,11 @@ nnoremap <silent> <leader>s :Sessions<cr>
 
 " Git Messenger {{{
 
-let g:auto_plugins+=[{'url': 'https://github.com/rhysd/git-messenger.vim'}]
-
 let g:git_messenger_no_default_mappings=v:true
 
 " }}}
 
 " {{{ Language Client
-
-let g:auto_plugins+=[{
-	\ 'url': 'https://github.com/autozimu/LanguageClient-neovim',
-	\ 'branch': 'next',
-	\ 'bootstrap': 'bash install.sh',
-	\ }]
 
 function! SetUpLanguageClient() abort
 	if has_key(g:LanguageClient_serverCommands, &filetype)
@@ -597,8 +539,6 @@ let g:LanguageClient_useVirtualText='All'
 
 " Lengthmatters {{{
 
-let g:auto_plugins+=[{'url': 'https://github.com/whatyouhide/vim-lengthmatters'}]
-
 let g:lengthmatters_on_by_default=0
 
 function! SetupLengthmatters()
@@ -616,34 +556,7 @@ augroup END
 
 " }}}
 
-" Missing filetypes {{{
-
-let g:auto_plugins+=[
-	\ {'url': 'https://github.com/JulesWang/css.vim'},
-	\ {'url': 'https://github.com/othree/html5.vim'},
-	\ {'url': 'https://github.com/dag/vim-fish'},
-	\ {'url': 'https://github.com/spwhitt/vim-nix'},
-	\ {'url': 'https://github.com/pbrisbin/vim-syntax-shakespeare'},
-	\ {'url': 'https://github.com/zenzike/vim-haskell-unicode'},
-	\ {'url': 'https://github.com/lifepillar/pgsql.vim'},
-	\ {'url': 'https://github.com/raichoo/purescript-vim'},
-	\ {'url': 'https://github.com/rust-lang/rust.vim'},
-	\ {'url': 'https://github.com/keith/swift.vim'},
-	\ ]
-
-" Fennel
-
-let g:auto_plugins+=[
-	\ {'url': 'https://github.com/Olical/aniseed', 'branch': 'develop'},
-	\ {'url': 'https://github.com/Olical/conjure', 'branch': 'develop'},
-	\ {'url': 'https://github.com/bakpakin/fennel.vim'}
-	\ ]
-
-" }}}
-
 " MUcomplete {{{
-
-let g:auto_plugins+=[{'url': 'https://github.com/lifepillar/vim-mucomplete'}]
 
 let g:mucomplete#chains={ 'default' : [ 'omni', 'path', 'uspl' ] }
 
@@ -658,8 +571,6 @@ set completeopt=menuone,noinsert,noselect
 " }}}
 
 " Sneak {{{
-
-let g:auto_plugins=[{'url': 'https://github.com/justinmk/vim-sneak'}]
 
 let g:sneak#use_ic_scs=1
 
@@ -681,15 +592,11 @@ xnoremap <silent> T :call sneak#wrap(visualmode(), 1, 1, 0, 2)
 
 " Random Colors {{{
 
-let g:auto_plugins+=[{'url': 'git@github.com:tssm/nvim-random-colors'}]
-
 command! RandomColorScheme lua require('random-colors')()
 
 " }}}
 
 " Rooter {{{
-
-let g:auto_plugins+=[{'url': 'https://github.com/airblade/vim-rooter'}]
 
 let g:rooter_patterns=[ '.git', '.git/', '.pijul/' ]
 
@@ -701,8 +608,6 @@ let g:rooter_silent_chdir=1
 
 " Template {{{
 
-let g:auto_plugins+=[{'url': 'https://github.com/aperezdc/vim-template'}]
-
 let g:templates_directory=[stdpath('config') . '/templates']
 
 let g:templates_global_name_prefix='template.'
@@ -713,8 +618,6 @@ let g:templates_no_builtin_templates=1
 
 " Undotree {{{
 
-let g:auto_plugins+=[{'url': 'https://github.com/mbbill/undotree'}]
-
 let g:undotree_HelpLine=0
 
 let g:undotree_SetFocusWhenToggle=1
@@ -722,8 +625,6 @@ let g:undotree_SetFocusWhenToggle=1
 " }}}
 
 " Vista {{{
-
-let g:auto_plugins+=[{'url': 'https://github.com/liuchengxu/vista.vim'}]
 
 let g:vista_close_on_jump=1
 
