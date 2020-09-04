@@ -51,6 +51,7 @@ in
 
 						# File types
 						(plug "css" "JulesWang" "css.vim")
+						(plug "dhall" "vmchale" "dhall-vim")
 						(plug "html" "othree" "html5.vim")
 						(plug "fish" "dag" "vim-fish")
 						(plug "nix" "spwhitt" "vim-nix")
