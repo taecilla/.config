@@ -429,13 +429,7 @@ let g:EditorConfig_max_line_indicator="none"
 
 " FZF {{{
 
-let $FZF_DEFAULT_OPTS='--ansi --info inline --layout reverse --preview-window noborder'
-
 let g:fzf_layout={'window': {'border': 'sharp', 'width': 1, 'height': 0.3, 'yoffset': 1}}
-
-let $FZF_DEFAULT_COMMAND='fd --color always --exclude "*.enc" --ignore-file .pijulignore --hidden'
-
-let $FZF_PREVIEW_COMMAND='bat {}'
 
 nnoremap <silent> <leader>b :Buffers<cr>
 
