@@ -316,9 +316,6 @@ set splitright
 command! -nargs=* -complete=shellcmd T vsplit | terminal <args>
 " Open the terminal in a vertical split
 
-command! -nargs=1 -complete=dir -bang S %bdelete<bang> | cd <args> | terminal
-" cd into <args> and start a terminal. S is short for shell
-
 set scrollback=100000
 
 " }}}
@@ -421,8 +418,6 @@ augroup DirvishSetUp
 augroup END
 " No space can go after <nop>
 
-command! -nargs=1 -complete=dir -bang E %bdelete<bang> | cd <args> | Dirvish
-
 " }}}
 
 " Editorconfig {{{
@@ -444,6 +439,23 @@ let $FZF_PREVIEW_COMMAND='bat {}'
 
 nnoremap <silent> <leader>b :Buffers<cr>
 
+function! CleanAndMove(dest) abort
+	%bdelete
+	execute 'cd' a:dest
+endfunction
+
+let g:findDirectories='fd --color always --hidden --type d --max-depth 10'
+function! Explore(dest) abort
+	call CleanAndMove(a:dest)
+	edit .
+endfunction
+nnoremap <silent> <leader>e :call fzf#run(fzf#wrap('explore', {
+	\ 'dir': '~',
+	\ 'options': '--prompt "Explore> "',
+	\ 'sink': function('Explore'),
+	\ 'source': g:findDirectories
+	\ }))<cr>
+
 nnoremap <silent> <leader>f :call fzf#vim#files('', fzf#vim#with_preview())<cr>
 
 function! RipgrepFzf() abort
@@ -456,6 +468,17 @@ function! RipgrepFzf() abort
 	call fzf#vim#grep(l:initial_command, 1, fzf#vim#with_preview(l:spec))
 endfunction
 nnoremap <silent> <leader>g :call RipgrepFzf()<cr>
+
+function! Terminal(dest) abort
+	call CleanAndMove(a:dest)
+	terminal
+endfunction
+nnoremap <silent> <leader>t :call fzf#run(fzf#wrap('terminal', {
+	\ 'dir': '~',
+	\ 'options': '--prompt "Terminal> "',
+	\ 'sink': function('Terminal'),
+	\ 'source': g:findDirectories
+	\ }))<cr>
 
 nnoremap <silent> <leader>h :History<cr>
 
