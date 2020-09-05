@@ -1,0 +1,5 @@
+.cache/
+.gem/
+.git/
+.pijul/
+.Trash/
