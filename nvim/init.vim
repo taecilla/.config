@@ -429,6 +429,12 @@ let g:EditorConfig_max_line_indicator="none"
 
 " FZF {{{
 
+let g:fzf_action={
+	\ 'ctrl-t': 'tab split',
+	\ 'ctrl-s': 'split',
+	\ 'ctrl-v': 'vsplit'
+	\ }
+
 let g:fzf_history_dir='~/.cache/fzf-history'
 
 let g:fzf_layout={'window': {'border': 'sharp', 'width': 1, 'height': 0.3, 'yoffset': 1}}
