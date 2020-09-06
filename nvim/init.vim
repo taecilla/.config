@@ -429,7 +429,12 @@ let g:EditorConfig_max_line_indicator="none"
 
 " FZF {{{
 
+function! PopulateQuickfix(lines)
+	call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+endfunction
+
 let g:fzf_action={
+	\ 'ctrl-q': function('PopulateQuickfix'),
 	\ 'ctrl-t': 'tab split',
 	\ 'ctrl-s': 'split',
 	\ 'ctrl-v': 'vsplit'
