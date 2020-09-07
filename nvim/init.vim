@@ -118,6 +118,21 @@ nnoremap Y y$
 nnoremap ZQ <cmd>confirm qall<cr>
 nnoremap ZZ <cmd>confirm wqall<cr>
 
+function! GetGitBranch() abort
+	let l:branchCmd='git symbolic-ref --short HEAD 2> /dev/null | tr -d "\n" ||'
+		\ . 'git rev-parse --short HEAD 2> /dev/null | tr -d "\n"'
+	let l:branch=system(l:branchCmd)
+
+	return (len(l:branch) > 0)
+		\ ? ('   ⌥ ' . l:branch)
+		\ : ''
+endfunction
+
+function! GetCurrentDir() abort
+	return substitute(getcwd(), $HOME, "~", "")
+endfunction
+nnoremap <c-g> <cmd>execute 'echo "' . GetCurrentDir() . GetGitBranch() '"'<cr>
+
 noremap! <c-\> <esc>
 tnoremap <c-\> <c-\><c-n>
 tnoremap <esc> <c-\><c-n>
