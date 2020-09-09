@@ -1,7 +1,7 @@
 [user]
 	name = Tae Sandoval
 [core]
-	pager = diffr --colors refine-added:foreground:black --colors refine-removed:foreground:black | less --chop-long-lines
+	pager = diffr --colors refine-added:foreground:black --colors refine-removed:foreground:black | $PAGER
 [interactive]
 	diffFilter = diffr --colors refine-added:foreground:black --colors refine-removed:foreground:black
 [merge]

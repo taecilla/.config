@@ -1,4 +1,5 @@
 set --export EDITOR nvim
+set --export PAGER less --chop-long-lines --quit-if-one-screen --tabs=2
 
 # Locale
 set --export LANG en_GB.UTF-8
