@@ -444,11 +444,22 @@ let g:EditorConfig_max_line_indicator="none"
 
 " FZF {{{
 
+function! EditFile(lines)
+	try
+		let l:line = a:lines[0]
+		call inputsave()
+		let l:dest = input("Filename: ", l:line, "file")
+		call inputrestore()
+		execute 'edit' l:dest
+	catch | endtry
+endfunction
+
 function! PopulateQuickfix(lines)
 	call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
 endfunction
 
 let g:fzf_action={
+	\ 'ctrl-e': function('EditFile'),
 	\ 'ctrl-q': function('PopulateQuickfix'),
 	\ 'ctrl-t': 'tab split',
 	\ 'ctrl-s': 'split',
