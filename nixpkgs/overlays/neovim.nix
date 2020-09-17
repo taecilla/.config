@@ -39,6 +39,10 @@ in
 						(plug "undotree" "mbbill" "undotree")
 						(plug "vista" "liuchengxu" "vista.vim")
 
+						# Dadbod
+						(plug "dadbod" "tpope" "vim-dadbod")
+						(plug "dadbod-completion" "kristijanhusak" "vim-dadbod-completion")
+
 						# FZF
 						(plug "fzf" "junegunn" "fzf")
 						(plug "fzf-vim" "junegunn" "fzf.vim")
