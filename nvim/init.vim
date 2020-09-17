@@ -51,6 +51,9 @@ set shortmess=csF
 set visualbell
 " Turns off annoying sound
 
+set wildignorecase
+" Use case-insensitive file search in the wildmenu
+
 " }}}
 
 " Command line {{{
@@ -385,24 +388,6 @@ set showtabline=0
 
 set termguicolors
 " Enable true color
-
-" }}}
-
-" Wildmenu {{{
-
-set wildignore+=.DS_Store,*.log,.nvimrc,Session.vim
-" Should be read from global .gitignore
-set wildignore+=.vagrant/**,build/**,node_modules/**,tmp/**
-" Should be read from project .gitignore
-set wildignore+=*.a,*.class,*.gem,*.lock,*.mo,*.o,*.pyc
-" Should be read from project .gitignore
-set wildignore+=*.gif,*.jpeg,*.jpg,*.pdf,*.png,*.svg,*.xib
-" Graphic stuff
-set wildignore+=*.lock
-" Lock stuff that is part of the project but shouldn't be modified by hand
-
-set wildignorecase
-" Use case-insensitive file search in the wildmenu
 
 " }}}
 
