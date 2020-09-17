@@ -255,6 +255,7 @@ function! GetFilename()
 		\ &buftype ==# 'terminal' ? TerminalTitle() :
 		\ &filetype ==# 'diff' ? 'Diff' :
 		\ &filetype ==# 'dirvish' ? bufname() :
+		\ &filetype ==# 'man' ? get(split(bufname(), '//'), 1) :
 		\ &filetype ==# 'undotree' ? 'Undotree' :
 		\ &filetype ==# 'vista_kind' ? 'Vista' :
 		\ len(expand('%')) > 0 ? expand('%:t') : '🆕'
@@ -284,6 +285,7 @@ function! StatusLine(active) abort
 		\ &buftype !=# 'terminal' &&
 		\ &filetype !=# 'diff' &&
 		\ &filetype !=# 'dirvish' &&
+		\ &filetype !=# 'man' &&
 		\ &filetype !=# 'undotree' &&
 		\ &filetype !=# 'vista_kind'
 		return
@@ -310,6 +312,8 @@ function! StatusLine(active) abort
 	endif
 	if &buftype ==# 'help'
 		setlocal statusline+=\ help
+	elseif &filetype ==# 'man'
+		setlocal statusline+=\ manual
 	endif
 
 	setlocal statusline+=%{GetFileStatus()}
