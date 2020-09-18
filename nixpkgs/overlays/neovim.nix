@@ -30,6 +30,7 @@ in
 						(plug "random-colors" "tssm" "nvim-random-colors")
 						(plug "rooter" "airblade" "vim-rooter")
 						(plug "repeat" "tpope" "vim-repeat")
+						(plug "signify" "mhinz" "vim-signify")
 						(plug "sleuth" "tpope" "vim-sleuth")
 						(plug "sneak" "justinmk" "vim-sneak")
 						(plug "surround" "tpope" "vim-surround")
