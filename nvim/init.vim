@@ -133,6 +133,7 @@ nnoremap Y y$
 
 nnoremap ZQ <cmd>confirm qall<cr>
 nnoremap ZZ <cmd>confirm wqall<cr>
+nnoremap gs <cmd>confirm wall<cr>
 
 function! GetGitBranch() abort
 	let l:branchCmd='git symbolic-ref --short HEAD 2> /dev/null | tr -d "\n" ||'
