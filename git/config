@@ -2,9 +2,16 @@
 	name = Tae Sandoval
 [core]
 	pager = diffr --colors refine-added:foreground:black --colors refine-removed:foreground:black | $PAGER
+[fetch]
+	prune = true
+	pruneTags = true
 [interactive]
 	diffFilter = diffr --colors refine-added:foreground:black --colors refine-removed:foreground:black
 [merge]
 	conflictStyle = diff3
 [alias]
 	graph = log --abbrev-commit --graph
+[pull]
+	ff = only
+[rebase]
+	autosquash = true
