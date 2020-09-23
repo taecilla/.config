@@ -469,6 +469,8 @@ let g:fzf_history_dir='~/.cache/fzf-history'
 
 let g:fzf_layout={'window': {'border': 'sharp', 'width': 1, 'height': 0.3, 'yoffset': 1}}
 
+nnoremap <silent> <leader>c :History:<cr>
+
 nnoremap <silent> <leader>b :Buffers<cr>
 
 function! CleanAndMove(dest) abort
