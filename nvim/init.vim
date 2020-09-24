@@ -26,6 +26,8 @@ augroup END
 set clipboard=unnamed,unnamedplus
 " Uses the clipboard as the unnamed register
 
+set diffopt+=vertical
+
 set hidden
 " Allows hidden buffers without writing them
 
@@ -73,24 +75,6 @@ cnoremap <C-P> <Up>
 cnoremap <C-N> <Down>
 " Search prefix forward
 " Makes the command line behave like Fish
-
-" }}}
-
-" Diff {{{
-
-set diffopt+=vertical
-
-let s:diff_tab=0
-function! s:diff_tab()
-	if s:diff_tab > 0
-		diffoff!
-		let s:diff_tab=0
-	else
-		windo diffthis
-		let s:diff_tab=1
-	endif
-endfunction
-command! Difftab call <SID>diff_tab()
 
 " }}}
 
