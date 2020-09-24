@@ -1,0 +1,14 @@
+set colored-stats
+set colored-completion-prefix
+set completion-ignore-case
+set mark-symlinked-directories
+set match-hidden-files
+set menu-complete-display-prefix
+set show-all-if-ambiguous
+set visible-stats
+
+"∫": backward-word
+"ƒ": forward-word
+
+"\C-p": history-search-backward
+"\C-n": history-search-forward

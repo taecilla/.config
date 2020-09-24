@@ -28,6 +28,9 @@ set --export NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/config
 # Postgres
 set --export PSQLRC $XDG_CONFIG_HOME/psqlrc
 
+# Readline
+set --export INPUTRC $XDG_CONFIG_HOME/inputrc
+
 set PATH $NIX_LINK/bin $NIX_LINK/sbin $PATH
 set PATH ~/.local/bin $PATH
 set PATH ~/.luarocks/bin $PATH
