@@ -518,9 +518,23 @@ let g:git_messenger_no_default_mappings=v:true
 function! SetUpLanguageClient() abort
 	if has_key(g:LanguageClient_serverCommands, &filetype)
 		call vista#RunForNearestMethodOrFunction()
+
+		augroup LanguageClientBufferAutocommand
+			autocmd! * <buffer>
+			autocmd BufWritePre <buffer> :call LanguageClient#textDocument_formatting()
+			autocmd InsertEnter <buffer> :call LanguageClient#clearDocumentHighlight()
+		augroup END
+
 		nnoremap <buffer> <silent> <c-]> :call LanguageClient#textDocument_definition()<cr>
 		nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
+		nnoremap <buffer> <silent> <localleader>* :call LanguageClient#textDocument_documentHighlight()<cr>
+		nnoremap <buffer> <silent> <localleader>a :call LanguageClient#textDocument_codeAction()<cr>
 		nnoremap <buffer> <silent> <localleader>e :call LanguageClient#explainErrorAtPoint()<cr>
+		nnoremap <buffer> <silent> <localleader>r :call LanguageClient#textDocument_rename()<cr>
+		nnoremap <buffer> <silent> <localleader>ds :call LanguageClient#textDocument_documentSymbol()<cr>
+		nnoremap <buffer> <silent> <localleader>ws :call LanguageClient#workspace_symbol()<cr>
+
+		setlocal formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
 	endif
 endfunction
 
