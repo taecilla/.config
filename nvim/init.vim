@@ -210,8 +210,12 @@ function! GetCursorPosition()
 		\ : ''
 endfunction
 
+function! IsDadbodBuffer() abort
+	return match(expand('%'), '.*\.dbout$') > -1
+endfunction
+
 function! GetFileStatus()
-	if &buftype != ''
+	if &buftype != '' || IsDadbodBuffer()
 		return ''
 	endif
 
@@ -229,8 +233,21 @@ function! GetFileDir()
 		return ''
 	endif
 
+	if IsDadbodBuffer()
+		return ''
+	endif
+
 	let l:path = expand('%:h')
 	return (len(l:path) > 0 && l:path != '.') ? l:path . '/' : ''
+endfunction
+
+function! DadbodQuery() abort
+	let l:queryFile = expand('%:r') . '.sql'
+	if filereadable(l:queryFile)
+		return join(readfile(l:queryFile))
+	endif
+
+	return ''
 endfunction
 
 function! GetFilename()
@@ -243,6 +260,7 @@ function! GetFilename()
 		\ &filetype ==# 'man' ? get(split(bufname(), '//'), 1) :
 		\ &filetype ==# 'undotree' ? 'Undotree' :
 		\ &filetype ==# 'vista_kind' ? 'Vista' :
+		\ IsDadbodBuffer() ? DadbodQuery() :
 		\ len(expand('%')) > 0 ? expand('%:t') : '🆕'
 endfunction
 
