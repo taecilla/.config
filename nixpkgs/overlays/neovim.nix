@@ -18,7 +18,6 @@ in
 						(plug "colorizer" "norcalli" "nvim-colorizer.lua")
 						(plug "commentary" "tpope" "vim-commentary")
 						(plug "difforig" "lifecrisis" "vim-difforig")
-						(plug "dirvish" "justinmk" "vim-dirvish")
 						(plug "editorconfig" "editorconfig" "editorconfig-vim")
 						(plug "git-messenger" "rhysd" "git-messenger.vim")
 						super.vimPlugins.LanguageClient-neovim
@@ -43,6 +42,10 @@ in
 						# Dadbod
 						(plug "dadbod" "tpope" "vim-dadbod")
 						(plug "dadbod-completion" "kristijanhusak" "vim-dadbod-completion")
+
+						# Dirvish
+						(plug "dirvish" "justinmk" "vim-dirvish")
+						(plug "dirvish-git" "kristijanhusak" "vim-dirvish-git")
 
 						# FZF
 						(plug "fzf" "junegunn" "fzf")
