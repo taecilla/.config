@@ -357,6 +357,18 @@ set splitright
 
 " Terminal {{{
 
+function! s:keepTerminalWindow() abort
+	let buf = expand('#')
+	if !empty(buf) && buflisted(buf) && bufnr(buf) != bufnr('%') && winnr('$') > 1
+		execute 'autocmd BufWinLeave <buffer> split' buf
+	endif
+endfunction
+
+augroup KeepTerminalWindow
+	autocmd!
+	autocmd TermClose * call s:keepTerminalWindow()
+augroup END
+
 command! -nargs=* -complete=shellcmd T vsplit | terminal <args>
 " Open the terminal in a vertical split
 
