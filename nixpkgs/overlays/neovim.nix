@@ -48,8 +48,7 @@ in
 						(plug "dirvish-git" "kristijanhusak" "vim-dirvish-git")
 
 						# FZF
-						(plug "fzf" "junegunn" "fzf")
-						(plug "fzf-vim" "junegunn" "fzf.vim")
+						super.vimPlugins.fzf-vim
 						(plug "fzf-quickfix" "fszymanski" "fzf-quickfix")
 						(plug "fzf-session" "dominickng" "fzf-session.vim")
 
