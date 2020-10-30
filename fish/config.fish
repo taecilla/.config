@@ -1,4 +1,4 @@
-set --export EDITOR nvim
+set --export EDITOR nvr
 set --export PAGER less --chop-long-lines --quit-if-one-screen --tabs=2
 
 # Locale

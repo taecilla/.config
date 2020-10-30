@@ -13,6 +13,12 @@ endfunction
 
 " Behavior {{{
 
+augroup NvrSetup
+	autocmd!
+	autocmd BufRead,BufNewFile addp-hunk-edit.diff setlocal bufhidden=wipe
+	autocmd FileType gitcommit,gitrebase setlocal bufhidden=wipe
+augroup END
+
 augroup AutoLoadVimrcChanges
 	autocmd!
 	autocmd BufWritePost $MYVIMRC source $MYVIMRC
