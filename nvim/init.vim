@@ -208,7 +208,7 @@ set sessionoptions=curdir,help,tabpages,winsize
 function! GetCursorPosition()
 	if &buftype == ''
 		let l:position = getcurpos()
-		return l:position[1] . 'Ⲷ ' . l:position[2] . 'Ⲽ'
+		return l:position[1] . '≡' . ' ' . l:position[2] . '∥'
 	endif
 
 	return &buftype ==# 'quickfix'
