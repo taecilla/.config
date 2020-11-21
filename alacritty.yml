@@ -1,0 +1,19 @@
+cursor:
+  style: Beam
+
+font:
+  normal:
+    family: JetBrains Mono NL
+    style: Light
+  size: 13.0
+
+shell:
+  program: /run/current-system/sw/bin/fish
+  args:
+    - --login
+    - --command
+    - "nvim --cmd sleep"
+
+window:
+  dynamic_padding: true
+  startup_mode: Fullscreen
