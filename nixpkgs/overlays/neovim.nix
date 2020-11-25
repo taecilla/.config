@@ -14,6 +14,7 @@ in
 				packages.myVimPackages = {
 					start = [
 						# General
+						(plug "bbye" "moll" "vim-bbye")
 						(plug "capital-h" "tssm" "vim-capital-h")
 						(plug "colorizer" "norcalli" "nvim-colorizer.lua")
 						(plug "commentary" "tpope" "vim-commentary")
