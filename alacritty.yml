@@ -1,4 +1,5 @@
 cursor:
+  blinking: Always
   style: Beam
 
 font:
