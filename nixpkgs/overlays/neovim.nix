@@ -105,4 +105,10 @@ in
 				};
 			};
 		};
+
+		neovim-unwrapped = super.neovim-unwrapped.overrideAttrs (oldAttrs: {
+			src = fetchGit https://github.com/neovim/neovim;
+			buildInputs = oldAttrs.buildInputs ++ [ super.pkgs.tree-sitter ];
+			version = "head";
+		});
 	}
