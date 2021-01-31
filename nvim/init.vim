@@ -39,6 +39,8 @@ set diffopt+=vertical
 set hidden
 " Allows hidden buffers without writing them
 
+set history=1000
+
 set inccommand=nosplit
 
 set iskeyword-=_
