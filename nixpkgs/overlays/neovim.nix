@@ -21,9 +21,9 @@ in
 						(plug "difforig" "lifecrisis" "vim-difforig")
 						(plug "editorconfig" "editorconfig" "editorconfig-vim")
 						(plug "git-messenger" "rhysd" "git-messenger.vim")
-						super.vimPlugins.LanguageClient-neovim
 						(plug "lengthmatters" "whatyouhide" "vim-lengthmatters")
 						(plug "linediff" "AndrewRadev" "linediff.vim")
+						(plug "lspconfig" "neovim" "nvim-lspconfig")
 						(plug "mergetool" "samoshkin" "vim-mergetool")
 						(plug "mucomplete" "lifepillar" "vim-mucomplete")
 						(plug "oldfiles" "gpanders" "vim-oldfiles")
@@ -38,7 +38,6 @@ in
 						(plug "template" "aperezdc" "vim-template")
 						(plug "trailing-whitespace" "bronson" "vim-trailing-whitespace")
 						(plug "undotree" "mbbill" "undotree")
-						(plug "vista" "liuchengxu" "vista.vim")
 
 						# Dadbod
 						(plug "dadbod" "tpope" "vim-dadbod")

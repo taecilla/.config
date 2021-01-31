@@ -20,6 +20,7 @@
 		pkgs.pijul
 		pkgs.ripgrep
 		pkgs.rnix-lsp
+		pkgs.sumneko-lua-language-server
 		pkgs.tree
 	];
 

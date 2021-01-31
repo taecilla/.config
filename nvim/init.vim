@@ -100,6 +100,8 @@ set nofoldenable
 
 " }}}
 
+lua require'configs.lsp'
+
 " Mappings {{{
 
 nnoremap <cr> <nop>
@@ -271,7 +273,6 @@ function! GetFilename()
 		\ &filetype ==# 'dirvish' ? bufname() :
 		\ &filetype ==# 'man' ? get(split(bufname(), '//'), 1) :
 		\ &filetype ==# 'undotree' ? 'Undotree' :
-		\ &filetype ==# 'vista_kind' ? 'Vista' :
 		\ IsDadbodBuffer() ? DadbodQuery() :
 		\ len(expand('%')) > 0 ? expand('%:t') : '🆕'
 endfunction
@@ -282,11 +283,6 @@ function! TerminalTitle()
 	endif
 
 	return b:term_title
-endfunction
-
-function! NearestMethodOrFunction() abort
-	let l:f = get(b:, 'vista_nearest_method_or_function', '')
-	return len(l:f) > 0 ? ('ƒ ' . l:f . '   ') : ''
 endfunction
 
 function! UnicodeWindowNumber() abort
@@ -301,8 +297,7 @@ function! StatusLine(active) abort
 		\ &filetype !=# 'diff' &&
 		\ &filetype !=# 'dirvish' &&
 		\ &filetype !=# 'man' &&
-		\ &filetype !=# 'undotree' &&
-		\ &filetype !=# 'vista_kind'
+		\ &filetype !=# 'undotree'
 		return
 	endif
 
@@ -335,7 +330,6 @@ function! StatusLine(active) abort
 	setlocal statusline+=\ \ \ %=
 
 	if a:active
-		setlocal statusline+=%{NearestMethodOrFunction()}
 		setlocal statusline+=%#StatusLine#
 		setlocal statusline+=%{GetCursorPosition()}
 	endif
@@ -555,89 +549,6 @@ let g:git_messenger_no_default_mappings=v:true
 
 " }}}
 
-" {{{ Language Client
-
-function! SetUpLanguageClient() abort
-	if has_key(g:LanguageClient_serverCommands, &filetype)
-		call vista#RunForNearestMethodOrFunction()
-
-		augroup LanguageClientBufferAutocommand
-			autocmd! * <buffer>
-			autocmd BufWritePre <buffer> :call LanguageClient#textDocument_formatting()
-			autocmd InsertEnter <buffer> :call LanguageClient#clearDocumentHighlight()
-		augroup END
-
-		nnoremap <buffer> <silent> <c-]> :call LanguageClient#textDocument_definition()<cr>
-		nnoremap <buffer> <silent> K :call LanguageClient#textDocument_hover()<cr>
-		nnoremap <buffer> <silent> <localleader>* :call LanguageClient#textDocument_documentHighlight()<cr>
-		nnoremap <buffer> <silent> <localleader>a :call LanguageClient#textDocument_codeAction()<cr>
-		nnoremap <buffer> <silent> <localleader>e :call LanguageClient#explainErrorAtPoint()<cr>
-		nnoremap <buffer> <silent> <localleader>r :call LanguageClient#textDocument_rename()<cr>
-		nnoremap <buffer> <silent> <localleader>ds :call LanguageClient#textDocument_documentSymbol()<cr>
-		nnoremap <buffer> <silent> <localleader>ws :call LanguageClient#workspace_symbol()<cr>
-
-		setlocal formatexpr=LanguageClient#textDocument_rangeFormatting_sync()
-	endif
-endfunction
-
-augroup LanguageClientSetUp
-	autocmd!
-	autocmd FileType * call SetUpLanguageClient()
-	autocmd User LanguageClientStarted set signcolumn=yes
-	autocmd User LanguageClientStopped set signcolumn=auto
-augroup END
-
-let g:LanguageClient_diagnosticsDisplay = {
-	\ 1: {
-		\ "name": "Error",
-		\ "signText": "»",
-		\ "signTexthl": "ErrorMsg",
-		\ "virtualTexthl": "ErrorMsg",
-	\ },
-	\ 2: {
-		\ "name": "Warning",
-		\ "signText": "»",
-		\ "signTexthl": "WarningMsg",
-		\ "virtualTexthl": "WarningMsg",
-	\ },
-	\ 3: {
-		\ "name": "Information",
-		\ "signText": "»",
-		\ "signTexthl": "Comment",
-		\ "virtualTexthl": "Comment",
-	\ },
-	\ 4: {
-		\ "name": "Hint",
-		\ "signText": "»",
-		\ "signTexthl": "Comment",
-		\ "virtualTexthl": "Comment",
-	\ }
-\ }
-
-let g:LanguageClient_diagnosticsList="Disabled"
-
-let g:LanguageClient_rootMarkers = {
-	\ 'haskell': ['*.cabal'],
-	\ 'lua': ['.luacompleterc'],
-	\ 'purescript': ['psc-package.json', 'spago.dhall'],
-	\ 'rust': ['Cargo.toml'],
-	\ 'scala': ['*.sbt']
-	\ }
-
-let g:LanguageClient_serverCommands = {
-	\ 'dhall': ['dhall-lsp-server'],
-	\ 'haskell': ['haskell-language-server-wrapper', '--lsp'],
-	\ 'lua': ['lua-lsp'],
-	\ 'nix': ['rnix-lsp'],
-	\ 'purescript': ['purescript-language-server', '--stdio', '--config', '{}'],
-	\ 'rust': ['rls'],
-	\ 'scala': ['metals-vim-lsc']
-\ }
-
-let g:LanguageClient_useVirtualText='All'
-
-" }}}
-
 " Lengthmatters {{{
 
 let g:lengthmatters_on_by_default=0
@@ -755,22 +666,6 @@ let g:templates_no_builtin_templates=1
 let g:undotree_HelpLine=0
 
 let g:undotree_SetFocusWhenToggle=1
-
-" }}}
-
-" Vista {{{
-
-let g:vista_close_on_jump=1
-
-let g:vista_default_executive="lcn"
-
-let g:vista_sidebar_position='vertical topleft'
-
-let g:vista_disable_statusline=1
-
-let g:vista_sidebar_width=80
-
-nnoremap <silent> <f6> :Vista!!<cr>
 
 " }}}
 
