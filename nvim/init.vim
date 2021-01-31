@@ -13,6 +13,8 @@ endfunction
 
 " Behavior {{{
 
+autocmd VimEnter * clearjumps
+
 augroup NvrSetup
 	autocmd!
 	autocmd BufRead,BufNewFile addp-hunk-edit.diff setlocal bufhidden=wipe
