@@ -718,6 +718,12 @@ command! RandomColorScheme lua require('random-colors')()
 
 " }}}
 
+" Reflex {{{
+
+let g:reflex_delete_cmd='trash'
+
+" }}}
+
 " Rooter {{{
 
 let g:rooter_patterns=[ '.git', '.git/', '.pijul/' ]
