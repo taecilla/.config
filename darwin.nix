@@ -10,7 +10,6 @@
     pkgs.diffr
     pkgs.fd
     pkgs.fish
-    pkgs.fzf
     pkgs.ghc
     pkgs.git
     pkgs.haskellPackages.haskell-language-server

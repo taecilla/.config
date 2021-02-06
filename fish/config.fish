@@ -17,11 +17,6 @@ if test -z $XDG_CONFIG_HOME
 	set --export XDG_CACHE_HOME $HOME/.cache
 end
 
-# FZF
-set --export FZF_DEFAULT_COMMAND 'fd --color always --exclude "*.enc" --ignore-file .pijulignore --hidden'
-set --export FZF_DEFAULT_OPTS '--ansi --info inline --layout reverse --preview-window noborder'
-set --export FZF_PREVIEW_COMMAND 'bat {}'
-
 # NPM
 set --export NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/config
 
@@ -30,6 +25,9 @@ set --export PSQLRC $XDG_CONFIG_HOME/psqlrc
 
 # Readline
 set --export INPUTRC $XDG_CONFIG_HOME/inputrc
+
+# Ripgrep
+set --export RIPGREP_CONFIG_PATH $XDG_CONFIG_HOME/ripgreprc
 
 set PATH /run/current-system/sw/bin $PATH
 set PATH $NIX_LINK/bin $NIX_LINK/sbin $PATH

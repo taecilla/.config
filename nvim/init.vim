@@ -1,16 +1,3 @@
-" Common utility functions {{{
-
-function! EditFile(path) abort
-	try
-		call inputsave()
-		let l:dest = input("Filename: ", a:path, "file")
-		call inputrestore()
-		execute 'edit' l:dest
-	catch | endtry
-endfunction
-
-" }}}
-
 " Behavior {{{
 
 autocmd VimEnter * clearjumps
@@ -453,7 +440,7 @@ augroup DirvishSetUp
 	autocmd FileType dirvish
 		\ nnoremap <buffer> <cr> <nop>|
 		\ nnoremap <buffer> gf <cmd>call dirvish#open('edit', 0)<cr> |
-		\ nnoremap <buffer> + <cmd>call EditFile(bufname())<cr>
+		\ nnoremap <buffer> + <cmd>lua require('procedures')['create-file'](vim.call("bufname"))<cr>
 augroup END
 " No space can go after <nop>
 
@@ -463,83 +450,6 @@ augroup END
 
 let g:EditorConfig_max_line_indicator="none"
 " Lengthmatters takes care of this
-
-" }}}
-
-" FZF {{{
-
-function! FzfEditFile(lines)
-	let l:line = a:lines[0]
-	call EditFile(l:line)
-endfunction
-
-function! PopulateQuickfix(lines)
-	call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
-endfunction
-
-let g:fzf_action={
-	\ 'ctrl-e': function('FzfEditFile'),
-	\ 'ctrl-q': function('PopulateQuickfix'),
-	\ 'ctrl-t': 'tab split',
-	\ 'ctrl-s': 'split',
-	\ 'ctrl-v': 'vsplit'
-	\ }
-
-let g:fzf_history_dir='~/.cache/fzf-history'
-
-let g:fzf_layout={'window': {'border': 'sharp', 'width': 1, 'height': 0.3, 'yoffset': 1}}
-
-nnoremap <silent> <leader>c :History:<cr>
-
-nnoremap <silent> <leader>b :Buffers<cr>
-
-function! CleanAndMove(dest) abort
-	%bdelete
-	execute 'cd' a:dest
-endfunction
-
-let g:findDirectories='fd --color always --hidden --type d --max-depth 10'
-function! Explore(dest) abort
-	call CleanAndMove(a:dest)
-	edit .
-endfunction
-nnoremap <silent> <leader>e :call fzf#run(fzf#wrap('explore', {
-	\ 'dir': '~',
-	\ 'options': '--prompt "Explore> "',
-	\ 'sink': function('Explore'),
-	\ 'source': g:findDirectories
-	\ }))<cr>
-
-nnoremap <silent> <leader>f :call fzf#vim#files('', fzf#vim#with_preview())<cr>
-
-function! RipgrepFzf() abort
-	let l:command_fmt = 'rg --color always --fixed-strings --trim --vimgrep '
-		\ . '--glob "!*.enc" --glob !.git/ --glob !.pijul/ --hidden --ignore-file .pijulignore --smart-case'
-		\ . ' %s || true'
-	let l:initial_command = printf(l:command_fmt, '')
-	let l:reload_command = printf(l:command_fmt, '{q}')
-	let l:spec = {'options': ['--phony', '--bind', 'change:reload:' . l:reload_command]}
-	call fzf#vim#grep(l:initial_command, 1, fzf#vim#with_preview(l:spec))
-endfunction
-nnoremap <silent> <leader>g :call RipgrepFzf()<cr>
-
-function! Terminal(dest) abort
-	call CleanAndMove(a:dest)
-	terminal
-endfunction
-nnoremap <silent> <leader>t :call fzf#run(fzf#wrap('terminal', {
-	\ 'dir': '~',
-	\ 'options': '--prompt "Terminal> "',
-	\ 'sink': function('Terminal'),
-	\ 'source': g:findDirectories
-	\ }))<cr>
-
-nnoremap <silent> <leader>h :History<cr>
-
-nnoremap <silent> <leader>q :Quickfix<cr>
-
-let g:fzf_session_path=stdpath('data') . '/session'
-nnoremap <silent> <leader>s :Sessions<cr>
 
 " }}}
 
@@ -650,6 +560,8 @@ let g:rooter_resolve_links=1
 let g:rooter_silent_chdir=1
 
 " }}}
+
+lua require'plugins.telescope'
 
 " Template {{{
 
