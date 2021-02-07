@@ -63,7 +63,7 @@ in
           (plug "dhall" "vmchale" "dhall-vim")
           (plug "html" "othree" "html5.vim")
           (plug "fish" "dag" "vim-fish")
-          (plug "nix" "spwhitt" "vim-nix")
+          (plug "nix" "LnL7" "vim-nix")
           (plug "pgsql" "lifepillar" "pgsql.vim")
           (plug "purescript" "purescript-contrib" "purescript-vim")
           (plug "rust" "rust-lang" "rust.vim")
