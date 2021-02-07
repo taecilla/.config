@@ -23,7 +23,6 @@ in
           (plug "git-messenger" "rhysd" "git-messenger.vim")
           (plug "lengthmatters" "whatyouhide" "vim-lengthmatters")
           (plug "linediff" "AndrewRadev" "linediff.vim")
-          (plug "lspconfig" "neovim" "nvim-lspconfig")
           (plug "mergetool" "samoshkin" "vim-mergetool")
           (plug "mucomplete" "lifepillar" "vim-mucomplete")
           (plug "random-colors" "tssm" "nvim-random-colors")
@@ -49,6 +48,10 @@ in
           # Lexima
           (plug "lexima" "cohama" "lexima.vim")
           (plug "lexima-template-rules" "zandrmartin" "lexima-template-rules")
+
+          # LSP
+          (plug "lspconfig" "neovim" "nvim-lspconfig")
+          (plug "lspsaga" "glepnir" "lspsaga.nvim")
 
           # Telescope
           (plug "plenary" "nvim-lua" "plenary.nvim")

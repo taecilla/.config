@@ -23,16 +23,19 @@
 			buffer-number
 			:n
 			lhs
-			(string.format "<cmd>lua vim.lsp.buf.%s()<cr>" func)
+			(string.format "<cmd>lua %s()<cr>" func)
 			{:noremap true :silent true}))
 
-	(set-map "<c-]>" :definition)
-	(set-map :K :hover)
-	(set-map :<localleader>* :document_highlight)
-	(set-map :<localleader>a :code_action)
-	(set-map :<localleader>r :rename)
-	(set-map :<localleader>ds :document_symbol)
-	(set-map :<localleader>ws :workspace_symbol)
+	(set-map "<c-]>" :vim.lsp.buf.definition)
+	(set-map :K "require'lspsaga.hover'.render_hover_doc")
+	(set-map :<localleader>* :vim.lsp.buf.document_highlight)
+	(set-map :<localleader>a :vim.lsp.buf.code_action)
+	(set-map :<localleader>r "require'lspsaga.rename'.rename")
+	(set-map :<localleader>ds :vim.lsp.buf.document_symbol)
+	(set-map :<localleader>ws :vim.lsp.buf.workspace_symbol)
+	(set-map :<localleader>s "require'lspsaga.diagnostic'.show_line_diagnostics")
+	(set-map "[d" "require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev")
+	(set-map "]d" "require'lspsaga.diagnostic'.lsp_jump_diagnostic_next")
 
 	; Buffer options
 
