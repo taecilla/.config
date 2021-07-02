@@ -447,6 +447,43 @@ let g:git_messenger_no_default_mappings=v:true
 
 " }}}
 
+" Hop {{{
+
+nmap f <cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>
+omap f <cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>
+xmap f <cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>
+
+nmap F <cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR })<cr>
+omap F <cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR })<cr>
+xmap F <cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR })<cr>
+
+nmap gl <cmd>lua require'hop'.hint_lines()<cr>
+omap gl <cmd>lua require'hop'.hint_lines()<cr>
+xmap gl <cmd>lua require'hop'.hint_lines()<cr>
+
+nmap g/ <cmd>lua require'hop'.hint_patterns()<cr>
+omap g/ <cmd>lua require'hop'.hint_patterns()<cr>
+xmap g/ <cmd>lua require'hop'.hint_patterns()<cr>
+
+nmap w <cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>
+omap w <cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>
+xmap w <cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR })<cr>
+
+nmap b <cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR })<cr>
+omap b <cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR })<cr>
+xmap b <cmd>lua require'hop'.hint_words({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR })<cr>
+
+augroup FixHopColors
+	autocmd!
+	autocmd ColorScheme *
+		\ highlight! link HopNextKey ErrorMsg |
+		\ highlight! link HopNextKey1 HopNextKey |
+		\ highlight! link HopNextKey2 WarningMsg |
+		\ highlight! link HopUnmatched Normal
+augroup END
+
+" }}}
+
 " Lengthmatters {{{
 
 let g:lengthmatters_on_by_default=0
@@ -506,26 +543,6 @@ augroup SignifySetup
 		\ nmap <localleader>uh <cmd>SignifyHunkUndo<cr>
 
 let g:signify_priority=0
-
-" }}}
-
-" Sneak {{{
-
-let g:sneak#use_ic_scs=1
-
-nnoremap <silent> f :call sneak#wrap('',           1, 0, 1, 2)<cr>
-nnoremap <silent> F :call sneak#wrap('',           1, 1, 1, 2)<cr>
-onoremap <silent> f :call sneak#wrap(v:operator,   1, 0, 1, 2)<cr>
-onoremap <silent> F :call sneak#wrap(v:operator,   1, 1, 1, 2)<cr>
-xnoremap <silent> f :call sneak#wrap(visualmode(), 1, 0, 1, 2)<cr>
-xnoremap <silent> F :call sneak#wrap(visualmode(), 1, 1, 1, 2)<cr>
-
-nnoremap <silent> t :call sneak#wrap('',           1, 0, 0, 2)<cr>
-nnoremap <silent> T :call sneak#wrap('',           1, 1, 0, 2)<cr>
-onoremap <silent> t :call sneak#wrap(v:operator,   1, 0, 0, 2)<cr>
-onoremap <silent> T :call sneak#wrap(v:operator,   1, 1, 0, 2)<cr>
-xnoremap <silent> t :call sneak#wrap(visualmode(), 1, 0, 0, 2)<cr>
-xnoremap <silent> T :call sneak#wrap(visualmode(), 1, 1, 0, 2)
 
 " }}}
 
