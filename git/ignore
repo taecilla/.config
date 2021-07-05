@@ -10,6 +10,7 @@ Session.vim
 # OS X crap
 
 .bloop/
+.bsp/
 .metals/
 metals.sbt
 # Scala
