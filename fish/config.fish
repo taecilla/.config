@@ -35,3 +35,9 @@ set PATH ~/.local/bin $PATH
 set PATH ~/.luarocks/bin $PATH
 set PATH node_modules/.bin $XDG_DATA_HOME/node_modules $PATH
 set --export PATH $PATH
+
+# Local configuration
+set local_config ~/.config/fish/local-config.fish
+if test -r $local_config
+	source $local_config
+end
