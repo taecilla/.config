@@ -1,3 +1,5 @@
+source ~/.config/nvim/filetype.lua
+
 " Behavior {{{
 
 autocmd VimEnter * clearjumps
