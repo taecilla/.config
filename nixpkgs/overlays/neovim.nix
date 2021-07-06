@@ -26,6 +26,7 @@ in
           (plug "linediff" "AndrewRadev" "linediff.vim")
           (plug "mergetool" "samoshkin" "vim-mergetool")
           (plug "mucomplete" "lifepillar" "vim-mucomplete")
+          (plug "orgmode" "kristijanhusak" "orgmode.nvim")
           (plug "random-colors" "tssm" "nvim-random-colors")
           (plug "rooter" "airblade" "vim-rooter")
           (plug "reflex" "tssm" "nvim-reflex")

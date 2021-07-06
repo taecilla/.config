@@ -517,6 +517,12 @@ set completeopt=menuone,noinsert,noselect
 
 " }}}
 
+" Orgmode {{{
+
+lua require'orgmode'.setup {}
+
+" }}}
+
 " Sandwich {{{
 
 nmap s <Nop>
