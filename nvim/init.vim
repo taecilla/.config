@@ -1,95 +1,10 @@
 source ~/.config/nvim/filetype.lua
-
-" Behavior {{{
-
-autocmd VimEnter * clearjumps
-
-augroup NvrSetup
-	autocmd!
-	autocmd BufRead,BufNewFile addp-hunk-edit.diff setlocal bufhidden=wipe
-	autocmd FileType gitcommit,gitrebase,help setlocal bufhidden=wipe
-augroup END
-
-augroup AutoLoadVimrcChanges
-	autocmd!
-	autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END
-
-augroup RestoreCursorShapeOnExit
-	autocmd!
-	autocmd VimLeave * set guicursor=a:ver35-blinkon1
-augroup END
-
-set clipboard=unnamed,unnamedplus
-" Uses the clipboard as the unnamed register
-
-set diffopt+=vertical
-
-set hidden
-" Allows hidden buffers without writing them
-
-set history=1000
-
-set inccommand=nosplit
-
-set iskeyword-=_
-
-set mouse=a
-
-set nojoinspaces
-" Use only 1 space after '.' when joining lines
-
-set noshowmode
-" Because Neovim's cursor shape
-
-augroup ResizeWindowsProportionally
-	autocmd!
-	autocmd VimResized * :wincmd =
-augroup END
-
-set shada='100,rman:,rterm:
-
-set shortmess=csF
-
-set visualbell
-" Turns off annoying sound
-
-set wildignorecase
-" Use case-insensitive file search in the wildmenu
-
-" }}}
-
-" Command line {{{
-
-cnoremap <C-A> <Home>
-" Go to the beginning of the line
-cnoremap <C-B> <Left>
-" Go back one character
-cnoremap <C-F> <Right>
-" Go forward one character
-cnoremap ∫ <S-Left>
-" Go back one word
-cnoremap ƒ <S-Right>
-" Go forward one word
-cnoremap <C-P> <Up>
-" Search prefix backwards
-cnoremap <C-N> <Down>
-" Search prefix forward
-" Makes the command line behave like Fish
-
-" }}}
-
-" Folding {{{
-
-set foldmethod=syntax
-" Create folds based on files's syntax
-
-set nofoldenable
-" Open folds by default
-
-" }}}
-
-lua require'configs.lsp'
+source ~/.config/nvim/lua/configs/behaviour.lua
+source ~/.config/nvim/lua/configs/command-line.lua
+source ~/.config/nvim/lua/configs/lsp.lua
+source ~/.config/nvim/lua/configs/search-and-replace.lua
+source ~/.config/nvim/lua/configs/terminal.lua
+source ~/.config/nvim/lua/configs/text.lua
 
 " Mappings {{{
 
@@ -147,56 +62,12 @@ xnoremap <expr> v
 
 " }}}
 
-" Indentation {{{
-
-set tabstop=2
-" Number of spaces that a <Tab> in the file counts for
-
-set shiftwidth=0
-" Number of spaces to use for each step of indent. 0 = tabstop
-
-" }}}
-
 " Providers {{{
 
 let g:loaded_node_provider=0
 let g:loaded_python_provider=0
 let g:loaded_python3_provider=0
 let g:loaded_ruby_provider=0
-
-" }}}
-
-" Search and replace {{{
-
-nnoremap n nzz
-nnoremap N Nzz
-vnoremap n nzz
-vnoremap N Nzz
-
-nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
-" Replace the word under cursor.
-
-set gdefault
-" Substitutes all matches on a line by default
-
-set ignorecase
-" Ignore case in a pattern
-
-set smartcase
-" Override the ignorecase option if the search pattern contains upper case characters
-
-augroup ToggleSearchHighlighting
-	autocmd!
-	autocmd InsertEnter * setlocal nohlsearch
-	autocmd InsertLeave * setlocal hlsearch
-augroup END
-" Toggles search highlighting off/on according to current mode. Source: http://blog.sanctum.geek.nz/vim-search-highlighting/
-
-" }}}
-
-" Sessions {{{
-
-set sessionoptions=curdir,help,tabpages,winsize
 
 " }}}
 
@@ -334,25 +205,6 @@ call StatusLine(v:true)
 
 " }}}
 
-" Tab pages {{{
-
-set splitbelow
-" Creates new horizontal windows at the bottom
-
-set splitright
-" Creates new vertical windows at the right
-
-" }}}
-
-" Terminal {{{
-
-command! -nargs=* -complete=shellcmd T vsplit | terminal <args>
-" Open the terminal in a vertical split
-
-set scrollback=100000
-
-" }}}
-
 " User interface {{{
 
 augroup FixColorSchemes
@@ -390,21 +242,6 @@ set showtabline=0
 
 set termguicolors
 " Enable true color
-
-" }}}
-
-" Wrap {{{
-
-set linebreak
-" When wrap is set use the value of breakat to break lines
-
-set breakat=\	\ 
-" Break lines only at whitespace
-
-set breakindent
-" Indents wrapped text
-
-set nowrap
 
 " }}}
 

@@ -1,13 +1,11 @@
-(module plugins.lsp {:require {
-	lspconfig lspconfig
-	lsputil	lspconfig/util}})
-
-(def- api vim.api)
-(def- cmd api.nvim_command)
+(local api vim.api)
+(local cmd api.nvim_command)
+(local lspconfig (require :lspconfig))
+(local lsputil (require :lspconfig.util))
 
 (cmd "highlight! link LspReferenceRead Search")
 
-(defn set-up [client buffer-number]
+(fn set-up [client buffer-number]
 	; Buffer auto commands
 
 	(cmd "augroup LspSetUp")
@@ -50,7 +48,7 @@
 
 ; Attach configuration to every server
 
-(def- servers [
+(local servers [
 	:dhall_lsp_server
 	:hls
 	:metals
