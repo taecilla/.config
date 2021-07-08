@@ -7,7 +7,7 @@ autocmd VimEnter * clearjumps
 augroup NvrSetup
 	autocmd!
 	autocmd BufRead,BufNewFile addp-hunk-edit.diff setlocal bufhidden=wipe
-	autocmd FileType gitcommit,gitrebase setlocal bufhidden=wipe
+	autocmd FileType gitcommit,gitrebase,help setlocal bufhidden=wipe
 augroup END
 
 augroup AutoLoadVimrcChanges
@@ -47,7 +47,7 @@ augroup ResizeWindowsProportionally
 	autocmd VimResized * :wincmd =
 augroup END
 
-set shada='1000
+set shada='100,rman:,rterm:
 
 set shortmess=csF
 
