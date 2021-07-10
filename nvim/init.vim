@@ -1,66 +1,20 @@
-source ~/.config/nvim/filetype.lua
-source ~/.config/nvim/lua/configs/behaviour.lua
-source ~/.config/nvim/lua/configs/command-line.lua
-source ~/.config/nvim/lua/configs/lsp.lua
-source ~/.config/nvim/lua/configs/search-and-replace.lua
-source ~/.config/nvim/lua/configs/terminal.lua
-source ~/.config/nvim/lua/configs/text.lua
-
-" Mappings {{{
-
 nnoremap <cr> <nop>
 let mapleader="\<Enter>"
 
 nnoremap <space> <nop>
 let maplocalleader="\<Space>"
 
-noremap d "_d
-noremap dd "_dd
-noremap D "_D
-noremap x "_x
-noremap X "_X
+lua My = {}
 
-noremap c "_c
-noremap cc "_cc
-noremap C "_C
-
-noremap yd d
-noremap yD D
-noremap ydd dd
-
-xnoremap p "_dP
-
-nnoremap Y y$
-" Makes Y behaves like C and D.
-
-nnoremap ZQ <cmd>confirm qall<cr>
-nnoremap ZZ <cmd>confirm wqall<cr>
-nnoremap gs <cmd>confirm wall<cr>
-
-function! GetGitBranch() abort
-	let l:branchCmd='git symbolic-ref --short HEAD 2> /dev/null | tr -d "\n" ||'
-		\ . 'git rev-parse --short HEAD 2> /dev/null | tr -d "\n"'
-	let l:branch=system(l:branchCmd)
-
-	return (len(l:branch) > 0)
-		\ ? ('   ⌥ ' . l:branch)
-		\ : ''
-endfunction
-
-function! GetCurrentDir() abort
-	return substitute(getcwd(), $HOME, "~", "")
-endfunction
-nnoremap <c-g> <cmd>execute 'echo "' . GetCurrentDir() . GetGitBranch() '"'<cr>
-
-noremap! <c-\> <esc>
-tnoremap <c-\> <c-\><c-n>
-tnoremap <esc> <c-\><c-n>
-
-xnoremap <expr> v
-	\ (mode() ==# 'v' ? "\<C-V>"
-	\ : mode() ==# 'V' ? 'v' : 'V')
-
-" }}}
+source ~/.config/nvim/filetype.lua
+source ~/.config/nvim/lua/configs/behaviour.lua
+source ~/.config/nvim/lua/configs/command-line.lua
+source ~/.config/nvim/lua/configs/lsp.lua
+source ~/.config/nvim/lua/configs/mappings.lua
+source ~/.config/nvim/lua/configs/search-and-replace.lua
+source ~/.config/nvim/lua/configs/terminal.lua
+source ~/.config/nvim/lua/configs/text.lua
+source ~/.config/nvim/lua/configs/ui.lua
 
 " Providers {{{
 
@@ -203,46 +157,6 @@ augroup SetStatusline
 augroup END
 
 call StatusLine(v:true)
-
-" }}}
-
-" User interface {{{
-
-augroup FixColorSchemes
-	autocmd!
-	autocmd ColorScheme *
-		\ highlight CursorLineNr guibg=bg guifg=bg |
-		\ highlight! link EndOfBuffer CursorLineNr |
-		\ highlight FoldColumn guibg=bg |
-		\ highlight! link Folded FoldColumn |
-		\ highlight! link LineNr FoldColumn |
-		\ highlight SignColumn guibg=bg |
-		\ highlight SpecialKey guibg=bg |
-		\ highlight TermCursorNC guibg=bg guifg=bg |
-		\ let s:highlight = execute('highlight StatusLineNC') |
-		\ let s:reverse = matchstr(s:highlight, 'inverse\|reverse') |
-		\ let s:split_color = matchstr(s:highlight,
-			\ 'gui' . (s:reverse == '' ? 'bg' : 'fg') . '=\zs\S*') |
-		\ execute 'highlight! VertSplit guibg=bg guifg='
-			\ . s:split_color . ' gui=NONE cterm=NONE'
-augroup END
-
-set fillchars=fold:\ 
-" Hides the decoration of folds
-
-set guicursor=n-v:block,i-c-ci-ve:ver35,r-cr:hor20,o:hor50
-	\,a:blinkwait700-blinkoff400-blinkon600-Cursor
-
-set list listchars=extends:…,precedes:…,tab:\ \ 
-
-set showmatch
-" Highlight matching braces when cursor is over one of them
-
-set showtabline=0
-" Never show the tabline
-
-set termguicolors
-" Enable true color
 
 " }}}
 
@@ -431,8 +345,5 @@ let g:undotree_HelpLine=0
 let g:undotree_SetFocusWhenToggle=1
 
 " }}}
-
-lua My = {}
-" Global table to store personal functions
 
 " vim: foldenable foldmethod=marker
