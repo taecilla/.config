@@ -5,7 +5,11 @@
 (fn vertsplit-highlight []
 	(local status-line-highlight (call.execute "highlight StatusLineNC"))
 	(local matchstr call.matchstr)
-	(local reversed? (not= (matchstr status-line-highlight "inverse\\|reverse") ""))
+	(local reversed? (not=
+		(matchstr
+			status-line-highlight
+			"gui=\\(\\w*,\\)*\\(inverse\\|reverse\\)\\(,\\w*\\)*")
+		""))
 	(local split-color
 		(matchstr status-line-highlight (.. :gui (if reversed? :fg :bg) "=\\zs\\S*")))
 	(string.format "VertSplit guibg=bg guifg=%s gui=NONE cterm=NONE" split-color))
