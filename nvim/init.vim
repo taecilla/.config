@@ -12,6 +12,7 @@ source ~/.config/nvim/lua/configs/command-line.lua
 source ~/.config/nvim/lua/configs/lsp.lua
 source ~/.config/nvim/lua/configs/mappings.lua
 source ~/.config/nvim/lua/configs/search-and-replace.lua
+source ~/.config/nvim/lua/configs/status-line.lua
 source ~/.config/nvim/lua/configs/terminal.lua
 source ~/.config/nvim/lua/configs/text.lua
 source ~/.config/nvim/lua/configs/ui.lua
@@ -23,140 +24,6 @@ let g:loaded_perl_provider=0
 let g:loaded_python_provider=0
 let g:loaded_python3_provider=0
 let g:loaded_ruby_provider=0
-
-" }}}
-
-" Status line {{{
-
-function! GetCursorPosition()
-	if &buftype == ''
-		let l:position = getcurpos()
-		return l:position[1] . '≡' . ' ' . l:position[2] . '∥'
-	endif
-
-	return &buftype ==# 'quickfix'
-		\ ? line('.') . '/' . line('$')
-		\ : ''
-endfunction
-
-function! IsDadbodBuffer() abort
-	return match(expand('%'), '.*\.dbout$') > -1
-endfunction
-
-function! GetFileStatus()
-	if &buftype != '' || IsDadbodBuffer()
-		return ''
-	endif
-
-	let l:file = expand('%:p')
-	let l:status =
-		\ (&readonly || (filereadable(l:file) && !filewritable(l:file))
-			\ ? ' 🔒'
-			\ : '')
-		\ . (&modified ? ' 💡' : '')
-	return len(l:status) > 0 ? ' ' . l:status : ''
-endfunction
-
-function! GetFileDir()
-	if &buftype != ''
-		return ''
-	endif
-
-	if IsDadbodBuffer()
-		return ''
-	endif
-
-	let l:path = expand('%:h')
-	return (len(l:path) > 0 && l:path != '.') ? l:path . '/' : ''
-endfunction
-
-function! DadbodQuery() abort
-	let l:queryFile = expand('%:r') . '.sql'
-	if filereadable(l:queryFile)
-		return join(readfile(l:queryFile))
-	endif
-
-	return ''
-endfunction
-
-function! GetFilename()
-	return
-		\ &buftype ==# 'help' ? expand('%:t:r') :
-		\ &buftype ==# 'quickfix' ? get(w:, 'quickfix_title', 'Quckfix list') :
-		\ &buftype ==# 'terminal' ? TerminalTitle() :
-		\ &filetype ==# 'diff' ? 'Diff' :
-		\ &filetype ==# 'dirvish' ? bufname() :
-		\ &filetype ==# 'man' ? get(split(bufname(), '//'), 1) :
-		\ &filetype ==# 'undotree' ? 'Undotree' :
-		\ IsDadbodBuffer() ? DadbodQuery() :
-		\ len(expand('%')) > 0 ? expand('%:t') : '🆕'
-endfunction
-
-function! TerminalTitle()
-	if b:term_title ==# bufname()
-		return get(split(bufname(), ':'), 2)
-	endif
-
-	return b:term_title
-endfunction
-
-function! UnicodeWindowNumber() abort
-	return nr2char(9461 + winnr() - 1)
-endfunction
-
-function! StatusLine(active) abort
-	if &buftype != '' &&
-		\ &buftype !=# 'help' &&
-		\ &buftype !=# 'quickfix' &&
-		\ &buftype !=# 'terminal' &&
-		\ &filetype !=# 'diff' &&
-		\ &filetype !=# 'dirvish' &&
-		\ &filetype !=# 'man' &&
-		\ &filetype !=# 'undotree'
-		return
-	endif
-
-	setlocal statusline=
-	if a:active
-		setlocal statusline+=%#StatusLineNC#
-	else
-		setlocal statusline+=%#StatusLine#
-		setlocal statusline+=%{UnicodeWindowNumber()}
-		setlocal statusline+=%#StatusLineNC#
-		setlocal statusline+=\ \ 
-	endif
-
-	setlocal statusline+=%{GetFileDir()}
-
-	if a:active
-		setlocal statusline+=%#StatusLine#
-	endif
-	setlocal statusline+=%{GetFilename()}
-	if a:active
-		setlocal statusline+=%#StatusLineNC#
-	endif
-	if &buftype ==# 'help'
-		setlocal statusline+=\ help
-	elseif &filetype ==# 'man'
-		setlocal statusline+=\ manual
-	endif
-
-	setlocal statusline+=%{GetFileStatus()}
-	setlocal statusline+=\ \ \ %=
-
-	if a:active
-		setlocal statusline+=%#StatusLine#
-		setlocal statusline+=%{GetCursorPosition()}
-	endif
-endfunction
-
-augroup SetStatusline
-	autocmd!
-	autocmd BufEnter,TermOpen,WinEnter * call StatusLine(v:true)
-	autocmd WinLeave * call StatusLine(v:false)
-augroup END
-
-call StatusLine(v:true)
 
 " }}}
 
