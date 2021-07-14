@@ -17,7 +17,10 @@ source ~/.config/nvim/lua/configs/terminal.lua
 source ~/.config/nvim/lua/configs/text.lua
 source ~/.config/nvim/lua/configs/ui.lua
 
-" Providers {{{
+" Disable features {{{
+
+let g:loaded_netrw=1
+let g:loaded_netrwPlugin=1
 
 let g:loaded_node_provider=0
 let g:loaded_perl_provider=0
@@ -36,22 +39,6 @@ let g:ayucolor="mirage"
 let g:ganymede_solid_background=1
 
 let g:material_theme_style='palenight'
-
-" }}}
-
-" Dirvish {{{
-
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
-
-augroup DirvishSetUp
-	autocmd!
-	autocmd FileType dirvish
-		\ nnoremap <buffer> <cr> <nop>|
-		\ nnoremap <buffer> gf <cmd>call dirvish#open('edit', 0)<cr> |
-		\ nnoremap <buffer> + <cmd>lua require('procedures')['create-file'](vim.call("bufname"))<cr>
-augroup END
-" No space can go after <nop>
 
 " }}}
 
