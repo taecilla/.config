@@ -45,32 +45,12 @@ let g:material_theme_style='palenight'
 " Editorconfig {{{
 
 let g:EditorConfig_max_line_indicator="none"
-" Lengthmatters takes care of this
 
 " }}}
 
 " Git Messenger {{{
 
 let g:git_messenger_no_default_mappings=v:true
-
-" }}}
-
-" Lengthmatters {{{
-
-let g:lengthmatters_on_by_default=0
-
-function! SetupLengthmatters()
-	if &textwidth > 0
-		LengthmattersEnable
-	else
-		LengthmattersDisable
-	endif
-endfunction
-
-augroup EnableLengthmatters
-	autocmd!
-	autocmd OptionSet * call SetupLengthmatters()
-augroup END
 
 " }}}
 
