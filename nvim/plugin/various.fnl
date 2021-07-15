@@ -14,6 +14,7 @@
 
 ; MUcomplete
 
+(set g.mucomplete#buffer_relative_paths true)
 (set g.mucomplete#chains {:default [:omni :path :uspl]})
 (set g.mucomplete#enable_auto_at_startup true)
 (set g.mucomplete#minimum_prefix_length 1)
