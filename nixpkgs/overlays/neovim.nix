@@ -10,7 +10,7 @@ in
 {
   neovim = super.neovim.override {
     configure = {
-      customRC = "source ~/.config/nvim/init.vim";
+      customRC = "luafile ~/.config/nvim/init.lua";
       packages.myVimPackages = {
         start = [
           # General
