@@ -50,25 +50,6 @@
 	"<Plug>(operator-sandwich-replace)<Plug>(operator-sandwich-release-count)<Plug>(textobj-sandwich-auto-a)")
 (set-map :x :sc "<Plug>(operator-sandwich-replace)")
 
-; Signify
-
-(fn set-up-signify-mappings []
-	(set-map :n "]h" "<plug>(signify-next-hunk)")
-	(set-map :n "[h" "<plug>(signify-prev-hunk)")
-	(set-map :n "]H" "9999]h")
-	(set-map :n "[H" "9999[h")
-	(set-map :n :<localleader>df :<cmd>SignifyDiff<cr>)
-	(set-map :n :<localleader>dh :<cmd>SignifyHunkDiff<cr>)
-	(set-map :n :<localleader>uh :<cmd>SignifyHunkUndo<cr>))
-(set My.signify_mappings set-up-signify-mappings)
-
-(cmd "augroup SignifySetup")
-(cmd "autocmd!")
-(cmd "autocmd User SignifySetup call v:lua.My.signify_mappings()")
-(cmd "augroup END")
-
-(set g.signify_priority 0)
-
 ; Templates
 
 (set g.templates_directory [(.. (vim.fn.stdpath :config) :/templates)])
