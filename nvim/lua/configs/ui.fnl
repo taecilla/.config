@@ -7,6 +7,13 @@
 (cmd "autocmd ColorScheme * call v:lua.My.color_scheme_fix()")
 (cmd "augroup END")
 
+; Configure color schemes
+
+(local g vim.g)
+(set g.ayucolor :mirage)
+(set g.ganymede_solid_background true)
+(set g.material_theme_style :palenight)
+
 ; Fix color schemes
 
 (local call vim.fn)
