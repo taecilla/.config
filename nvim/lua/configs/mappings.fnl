@@ -19,10 +19,7 @@
 
 (set-map :n :Y :y$)
 
-(set-map :n :<c-\> :<esc>)
-
 (set-map :n :ZQ "<cmd>confirm qall<cr>")
-(set-map :n :ZZ "<cmd>confirm wqall<cr>")
 (set-map :n :gs "<cmd>confirm wall<cr>")
 
 (vim.api.nvim_set_keymap
