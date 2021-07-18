@@ -14,6 +14,7 @@ in
       packages.myVimPackages = {
         start = [
           # General
+          (plug "auto-session" "rmagatti" "auto-session")
           (plug "bbye" "moll" "vim-bbye")
           (plug "capital-h" "tssm" "vim-capital-h")
           (plug "colorizer" "norcalli" "nvim-colorizer.lua")
@@ -57,6 +58,7 @@ in
           (plug "plenary" "nvim-lua" "plenary.nvim")
           (plug "popup" "nvim-lua" "popup.nvim")
           (plug "telescope" "nvim-telescope" "telescope.nvim")
+          (plug "session-lens" "rmagatti" "session-lens")
 
           # File types
           (plug "css" "JulesWang" "css.vim")

@@ -4,6 +4,14 @@
 (fn set-map [mode lhs rhs]
 	(vim.api.nvim_set_keymap mode lhs rhs {}))
 
+; Auto Session
+
+((. (require :auto-session) :setup) {
+	:auto_save_enabled false
+	:auto_restore_enabled false
+	:auto_session_enable_last_session false
+	:auto_session_enabled true})
+
 ; Editorconfig
 
 (set g.EditorConfig_max_line_indicator :none)
