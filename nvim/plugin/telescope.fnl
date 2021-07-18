@@ -1,6 +1,7 @@
 (local aniseed (require :aniseed.core))
 (local pickers (require :telescope.builtin))
 (local actions (require :telescope.actions))
+(local path (require :plenary.path))
 (local procedures (require :procedures))
 (local sorters (require :telescope.sorters))
 (local telescope (require :telescope))
@@ -65,6 +66,17 @@
 
 ; Custom finders
 
+(fn find-buffers []
+	(fn entry-maker [entry]
+		(local bufname entry.info.name)
+		(local display (if
+			(= bufname "") "🆕"
+			(vim.startswith bufname "man://") (vim.fn.substitute bufname "^man://" "" "")
+			(> (vim.fn.match bufname "^\\w*://") -1) bufname
+			(: (path:new bufname) :make_relative (vim.fn.getcwd))))
+		{:bufnr entry.bufnr :display display :ordinal display :value display})
+	(pickers.buffers {:entry_maker entry-maker}))
+
 (fn add-pijulignore? [tbl]
 	; Both fd and rg rise an error if --file-ignore doesn't exist so it must be
 	; added conditionally
@@ -96,7 +108,9 @@
 		(string.format "<cmd>lua %s()<cr>" rhs)
 		{:noremap true :silent true}))
 
-(set-map :b "require'telescope.builtin'.buffers")
+(set My.find_buffers find-buffers)
+(set-map :b :My.find_buffers)
+
 (set-map :c "require'telescope.builtin'.command_history")
 
 (set My.find_files find-files)
