@@ -107,3 +107,7 @@
 
 (set-map :h "require'telescope.builtin'.oldfiles")
 (set-map :q "require'telescope.builtin'.quickfix")
+(vim.api.nvim_set_keymap
+	:n :z=
+	"<cmd>lua require'telescope.builtin'.spell_suggest(require'telescope.themes'.get_dropdown())<cr>"
+	{})
