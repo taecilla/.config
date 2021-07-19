@@ -21,6 +21,7 @@
 (set opt.shada "'100,rman:,rterm:")
 (set opt.shortmess :csF)
 (set opt.spelloptions :camel)
+(set opt.tildeop true)
 (set opt.visualbell true)
 (set opt.wildignorecase true)
 
