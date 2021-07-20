@@ -4,12 +4,20 @@
 (cmd "autocmd VimEnter * clearjumps")
 ; Neovim remote
 (cmd "autocmd BufRead,BufNewFile addp-hunk-edit.diff setlocal bufhidden=wipe")
-(cmd "autocmd FileType gitcommit,gitrebase,help setlocal bufhidden=wipe")
+(cmd "autocmd FileType gitcommit,gitrebase setlocal bufhidden=wipe")
 ; Restore cursor shape on exit
 (cmd "autocmd VimLeave * set guicursor=a:ver35-blinkon1")
+(cmd "autocmd VimLeavePre * call v:lua.My.clean_up()")
 ; Resize windows proportionally
 (cmd "autocmd VimResized * :wincmd =")
 (cmd "augroup END")
+
+(local call vim.api)
+(fn clean-up []
+	(each [_ bufnr (ipairs (call.nvim_list_bufs))]
+		(when (= (call.nvim_buf_get_option bufnr :buftype) :help)
+			(cmd (string.format "bwipeout %i" bufnr)))))
+(set My.clean_up clean-up)
 
 (local opt vim.opt)
 (set opt.clipboard [:unnamed :unnamedplus])
