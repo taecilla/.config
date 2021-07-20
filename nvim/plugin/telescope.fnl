@@ -99,6 +99,9 @@
 			(add-pijulignore? grep-command)
 			(pickers.live_grep {:vimgrep_arguments grep-command}))))
 
+(fn quickfix []
+	(pickers.quickfix {:entry_maker procedures.quickfix-entry-maker}))
+
 ; Mappings
 
 (fn set-map [lhs rhs]
@@ -120,7 +123,10 @@
 (set-map :g :My.grep)
 
 (set-map :h "require'telescope.builtin'.oldfiles")
-(set-map :q "require'telescope.builtin'.quickfix")
+
+(set My.find_in_quickfix quickfix)
+(set-map :q :My.find_in_quickfix)
+
 (set-map :s "require'session-lens'.search_session")
 (vim.api.nvim_set_keymap
 	:n :z=
