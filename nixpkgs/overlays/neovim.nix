@@ -16,10 +16,16 @@ in
           # General
           (plug "auto-session" "rmagatti" "auto-session")
           (plug "bbye" "moll" "vim-bbye")
-          (plug "capital-h" "tssm" "vim-capital-h")
           (plug "colorizer" "norcalli" "nvim-colorizer.lua")
           (plug "commentary" "tpope" "vim-commentary")
-          (plug "difforig" "lifecrisis" "vim-difforig")
+          (
+            super.vimUtils.buildVimPlugin {
+              name = "difforig";
+              src = fetchGit "https://github.com/lifecrisis/vim-difforig";
+              buildPhase = ":";
+              patches = [ ./mapcheck.patch ];
+            }
+          )
           (plug "editorconfig" "editorconfig" "editorconfig-vim")
           (plug "git-messenger" "rhysd" "git-messenger.vim")
           (plug "hop" "phaazon" "hop.nvim")

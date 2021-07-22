@@ -31,7 +31,7 @@
 
 ; Orgmode
 
-(let [orgmode (require :orgmode)] (orgmode.setup {}))
+(let [orgmode (require :orgmode)] (orgmode.setup {:mappings {:disable_all true}}))
 
 ; Random colors
 

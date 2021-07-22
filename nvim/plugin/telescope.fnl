@@ -122,7 +122,9 @@
 (set My.grep grep)
 (set-map :g :My.grep)
 
-(set-map :h "require'telescope.builtin'.oldfiles")
+(set-map :h "require'telescope.builtin'.help_tags")
+
+(set-map :o "require'telescope.builtin'.oldfiles")
 
 (set My.find_in_quickfix quickfix)
 (set-map :q :My.find_in_quickfix)
